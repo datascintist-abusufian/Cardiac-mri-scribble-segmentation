@@ -1,4 +1,4 @@
-# S²RE-Net: A Semantic Response Enhancement Network for Scribble-Supervised Cardiac MRI Segmentation
+# From Sparse Scribbles to Accurate Cardiac MRI Segmentation: A Multi-Expert Dynamic Fusion Framework
 
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.10+-EE4C2C.svg?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
