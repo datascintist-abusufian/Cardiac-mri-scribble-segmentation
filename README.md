@@ -63,32 +63,31 @@ This repository contains the official PyTorch implementation of the paper:
 *Shared Conv-Embedding feeds the Transformer, CNN and SR-Branch experts; each expert is refined by HMNA blocks, and Dynamic Mix estimates pixel-wise fusion weights with reverse pseudo-label constraints.*
 
 
+```text
 ┌─────────────────────────────────────────────────────┐
-│ Shared Encoder │
-│ Input → Conv Embed → Multi-Level Conv Blocks │
-└─────────────────┬───────────────────────────────────┘
-│
-┌───────────────────────┼───────────────────────┐
-▼ ▼ ▼
+│                    Shared Encoder                   │
+│      Input → Conv Embed → Multi-Level Conv Blocks   │
+└─────────────────────────┬───────────────────────────┘
+                          │
+        ┌─────────────────┼─────────────────┐
+        ▼                 ▼                 ▼
 ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-│ Transformer │ │ CNN │ │ SR-Branch │
-│ Branch │ │ Branch │ │ (Structural │
-│ (Global Context)│ │ (Local Details) │ │ Recovery) │
+│   Transformer   │ │       CNN       │ │    SR-Branch    │
+│     Branch      │ │     Branch      │ │   (Structural   │
+│ (Global Context)│ │ (Local Details) │ │    Recovery)    │
 └────────┬────────┘ └────────┬────────┘ └────────┬────────┘
-│ │ │
-└─────────────────────┼─────────────────────┘
-▼
-┌─────────────────────────────────┐
-│ Dynamic Mix │
-│ (Pixel-Wise Adaptive Fusion │
-│ + Reverse Pseudo-Labels) │
-└─────────────────────────────────┘
-▼
-┌─────────────────────────────────┐
-│ Final Prediction │
-└─────────────────────────────────┘
-
-text
+         └───────────────────┼───────────────────┘
+                             ▼
+              ┌─────────────────────────────┐
+              │         Dynamic Mix         │
+              │ (Pixel-Wise Adaptive Fusion │
+              │   + Reverse Pseudo-Labels)  │
+              └─────────────────────────────┘
+                             ▼
+              ┌─────────────────────────────┐
+              │       Final Prediction      │
+              └─────────────────────────────┘
+```
 
 **HMNA Block:** Multi-scale context dictionary → High-order non-local attention → Multi-receptive-field refinement → Adaptive fusion
 
@@ -101,14 +100,19 @@ text
 ```bash
 git clone https://github.com/datascintist-abusufian/S2RE-Net.git
 cd S2RE-Net
-2. Set Up Environment
-bash
+```
+
+### 2. Set Up Environment
+
+```bash
 conda create -n s2renet python=3.9 -y
 conda activate s2renet
 pip install -r requirements.txt
-requirements.txt:
+```
 
-text
+`requirements.txt`:
+
+```text
 torch>=1.10.0
 torchvision>=0.11.0
 numpy>=1.21.0
@@ -122,9 +126,13 @@ pyyaml>=5.4.0
 scikit-learn>=0.24.0
 scipy>=1.7.0
 matplotlib>=3.3.0
-3. Prepare Datasets
-ACDC Dataset
-bash
+```
+
+### 3. Prepare Datasets
+
+#### ACDC Dataset
+
+```bash
 # Download from: https://humanheart-project.creatis.insa-lyon.fr/database/#collection/637218c173e9f0047faa00fb
 # Organize as:
 data/acdc/
@@ -137,8 +145,11 @@ data/acdc/
 └── testing/
     ├── img/
     └── scribble/
-MSCMRseg Dataset
-bash
+```
+
+#### MSCMRseg Dataset
+
+```bash
 # Download from: https://zmiclab.github.io/zxh/0/mscmrseg19/
 # Organize as:
 data/mscmrseg/
@@ -151,8 +162,11 @@ data/mscmrseg/
 └── testing/
     ├── img/
     └── scribble/
-4. Train the Model
-bash
+```
+
+### 4. Train the Model
+
+```bash
 # Training on ACDC
 python train.py --config configs/acdc.yaml
 
@@ -161,14 +175,25 @@ python train.py --config configs/mscmrseg.yaml
 
 # Multi-GPU training
 python -m torch.distributed.launch --nproc_per_node=4 train.py --config configs/acdc.yaml --distributed
-5. Evaluate the Model
-bash
+```
+
+### 5. Evaluate the Model
+
+```bash
 python test.py --config configs/acdc.yaml --checkpoint checkpoints/best_model.pth
-6. Visualize Results
-bash
+```
+
+### 6. Visualize Results
+
+```bash
 python visualize.py --config configs/acdc.yaml --checkpoint checkpoints/best_model.pth --num_samples 10
-📁 Repository Structure
-text
+```
+
+---
+
+## 📁 Repository Structure
+
+```text
 S2RE-Net/
 ├── configs/
 │   ├── acdc.yaml              # ACDC configuration
@@ -201,10 +226,15 @@ S2RE-Net/
 ├── requirements.txt
 ├── LICENSE
 └── README.md                  # This file
-⚙️ Configuration
-Example configs/acdc.yaml:
+```
 
-yaml
+---
+
+## ⚙️ Configuration
+
+Example `configs/acdc.yaml`:
+
+```yaml
 # Dataset
 dataset: acdc
 data_root: ./data/acdc
@@ -241,18 +271,28 @@ model:
 log_dir: ./logs/acdc
 checkpoint_dir: ./checkpoints/acdc
 tensorboard: True
-🧪 Evaluation Metrics
+```
+
+---
+
+## 🧪 Evaluation Metrics
+
 We report the following metrics in our experiments:
 
-Metric	Description
-Dice Score	Dice similarity coefficient per structure (RV, MYO, LV) and average
-Sensitivity	True positive rate (recall)
-Precision	Positive predictive value
-Volume Error	Absolute volume difference normalized by ground truth volume
-📝 Citation
+| Metric | Description |
+|--------|-------------|
+| Dice Score | Dice similarity coefficient per structure (RV, MYO, LV) and average |
+| Sensitivity | True positive rate (recall) |
+| Precision | Positive predictive value |
+| Volume Error | Absolute volume difference normalized by ground truth volume |
+
+---
+
+## 📝 Citation
+
 If you find this code useful for your research, please cite our paper:
 
-bibtex
+```bibtex
 @article{sufian2025s2renet,
   title={S$^2$RE-Net: A Semantic Response Enhancement Network for Scribble-Supervised Cardiac MRI Segmentation},
   author={Sufian, Md Abu and Niu, Mingbo and Anonymous},
@@ -260,47 +300,62 @@ bibtex
   year={2025},
   publisher={IEEE}
 }
+```
+
 BibTeX (BibLaTeX style):
 
-bibtex
+```bibtex
 @article{sufian2025s2renet,
-  author = {Sufian, Md Abu and Niu, Mingbo and Anonymous},
-  title = {S$^2$RE-Net: {A} Semantic Response Enhancement Network for Scribble-Supervised Cardiac {MRI} Segmentation},
+  author  = {Sufian, Md Abu and Niu, Mingbo and Anonymous},
+  title   = {S$^2$RE-Net: {A} Semantic Response Enhancement Network for Scribble-Supervised Cardiac {MRI} Segmentation},
   journal = {IEEE Transactions on Medical Imaging},
-  year = {2025},
-  volume = {},
-  number = {},
-  pages = {},
-  doi = {},
-  issn = {}
+  year    = {2025},
+  volume  = {},
+  number  = {},
+  pages   = {},
+  doi     = {},
+  issn    = {}
 }
-📧 Contact
+```
+
+---
+
+## 📧 Contact
+
 For questions, suggestions, or collaboration inquiries, please:
 
-Open an issue on GitHub
+- Open an issue on GitHub
+- Email: author@email.com
 
-Email: author@email.com
+---
 
-📄 License
+## 📄 License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-🙏 Acknowledgments
-ACDC dataset organizers: Human Heart Project
+---
 
-MSCMRseg dataset organizers: Zhongxing Zhuang's Lab
+## 🙏 Acknowledgments
 
-This work was supported by the IVR Research Institute
+- ACDC dataset organizers: Human Heart Project
+- MSCMRseg dataset organizers: Zhongxing Zhuang's Lab
+- This work was supported by the IVR Research Institute
 
-🌟 Star History
+---
+
+## 🌟 Star History
+
 If you find this repository useful, please give it a ⭐ star! It helps others discover the project.
 
-📖 Additional Resources
-📄 Paper (arXiv)
+---
 
-📄 IEEE TMI Publication
+## 📖 Additional Resources
 
-📊 Model Weights
+- 📄 Paper (arXiv)
+- 📄 IEEE TMI Publication
+- 📊 Model Weights
+- 🎬 Demo Video
 
-🎥 Demo Video
+---
 
 Built with ❤️ by the IVR Research Institute
