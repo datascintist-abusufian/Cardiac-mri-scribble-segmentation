@@ -287,38 +287,6 @@ We report the following metrics in our experiments:
 
 ---
 
-## 📝 Citation
-
-If you find this code useful for your research, please cite our paper:
-
-```bibtex
-@article{sufian2025s2renet,
-  title={S$^2$RE-Net: A Semantic Response Enhancement Network for Scribble-Supervised Cardiac MRI Segmentation},
-  author={Sufian, Md Abu and Niu, Mingbo and Anonymous},
-  journal={IEEE Transactions on Medical Imaging},
-  year={2025},
-  publisher={IEEE}
-}
-```
-
-BibTeX (BibLaTeX style):
-
-```bibtex
-@article{sufian2025s2renet,
-  author  = {Sufian, Md Abu and Niu, Mingbo and Anonymous},
-  title   = {S$^2$RE-Net: {A} Semantic Response Enhancement Network for Scribble-Supervised Cardiac {MRI} Segmentation},
-  journal = {IEEE Transactions on Medical Imaging},
-  year    = {2025},
-  volume  = {},
-  number  = {},
-  pages   = {},
-  doi     = {},
-  issn    = {}
-}
-```
-
----
-
 ## 📧 Contact
 
 For questions, suggestions, or collaboration inquiries, please:
@@ -349,9 +317,6 @@ If you find this repository useful, please give it a ⭐ star! It helps others d
 ---
 
 ## 📖 Additional Resources
-
-- 📄 Paper (arXiv)
-- 📄 IEEE TMI Publication
 - 📊 Model Weights
 - 🎬 Demo Video
 
