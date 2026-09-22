@@ -48,11 +48,21 @@ This repository contains the official PyTorch implementation of the paper:
 | CycleMix | 0.7507 | 0.8162 | 0.8889 | 0.8186 | 0.2679 |
 | FDDSeg | 0.7798 | 0.7039 | 0.8878 | 0.7905 | 0.2675 |
 
+### Qualitative Comparison
+
+![Qualitative comparison on ACDC and MSCMRseg](figure4.jpeg)
+
+*Predictions from UNet variants, mixing-based baselines and recent scribble-supervised methods compared with ours; red, green and blue denote RV, MYO and LV.*
+
 ---
 
 ## 🏗️ Architecture
 
-## 🏗️ Architecture
+![TriFuse-SRNet architecture: three-expert framework with Dynamic Mix fusion](figure1.png)
+
+*Shared Conv-Embedding feeds the Transformer, CNN and SR-Branch experts; each expert is refined by HMNA blocks, and Dynamic Mix estimates pixel-wise fusion weights with reverse pseudo-label constraints.*
+
+
 ┌─────────────────────────────────────────────────────┐
 │ Shared Encoder │
 │ Input → Conv Embed → Multi-Level Conv Blocks │
