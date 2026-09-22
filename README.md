@@ -338,7 +338,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 🙏 Acknowledgments
 
 - ACDC dataset organizers: Human Heart Project
-- MSCMRseg dataset organizers: Zhongxing Zhuang's Lab
+- MSCMRseg dataset organizers
 - This work was supported by the IVR Research Institute
 
 ---
