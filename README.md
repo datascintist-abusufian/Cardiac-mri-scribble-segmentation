@@ -14,8 +14,7 @@
 This repository contains the official PyTorch implementation of the paper:
 
 > **S²RE-Net: A Semantic Response Enhancement Network for Scribble-Supervised Cardiac MRI Segmentation**  
-> *Md Abu Sufian, Mingbo Niu, et al.*  
-> IEEE Transactions on Medical Imaging (TMI), 2025
+> *Md Abu Sufian, Mingbo Niu, et al.* 2025
 
 ---
 
